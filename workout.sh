@@ -1,3 +1,22 @@
+function output() {
+  # which say > /dev/null
+  # if [ $? -eq 0 ]
+  # then
+  #   say $@
+  #   return
+  # fi
+
+  # which espeak > /dev/null
+  # if [ $? -eq 0 ]
+  # then
+  #   echo $@ | espeak
+  #   return
+  # fi
+
+  echo "No speech synthesis found: please install eSpeak http://espeak.sourceforge.net/"
+  exit 1
+}
+
 exercises=(
   "Jumping jacks!"
   "Wall sit!"
@@ -15,9 +34,9 @@ exercises=(
 
 for exercise in "${exercises[@]}"
 do
-  say $exercise
-  sleep 30
-  say "Break!"
-  sleep 10
+  output $exercise
+  sleep 3
+  output "Break!"
+  sleep 1
 done
-say "Done!"
+output "Done!"
