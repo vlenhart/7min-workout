@@ -1,17 +1,17 @@
 function output() {
-  # which say > /dev/null
-  # if [ $? -eq 0 ]
-  # then
-  #   say $@
-  #   return
-  # fi
+  which say > /dev/null
+  if [ $? -eq 0 ]
+  then
+    say $@
+    return
+  fi
 
-  # which espeak > /dev/null
-  # if [ $? -eq 0 ]
-  # then
-  #   echo $@ | espeak
-  #   return
-  # fi
+  which espeak > /dev/null
+  if [ $? -eq 0 ]
+  then
+    echo $@ | espeak
+    return
+  fi
 
   echo "No speech synthesis found: please install eSpeak http://espeak.sourceforge.net/"
   exit 1
