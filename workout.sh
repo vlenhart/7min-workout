@@ -28,7 +28,7 @@ exercises=(
   "Plank!"
   "High knees!"
   "Lunges!"
-  "Push-ups!"
+  "Push-up and rotation!"
   "Side plank!"
 )
 
