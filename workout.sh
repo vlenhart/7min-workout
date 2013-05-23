@@ -31,12 +31,17 @@ exercises=(
   "Push-up and rotation!"
   "Side plank!"
 )
+last_exercise=${exercises[${#exercises[@]}-1]}
 
 for exercise in "${exercises[@]}"
 do
   output $exercise
   sleep 30
-  output "Break!"
-  sleep 10
+
+  if [ "$exercise" != "$last_exercise" ]
+  then
+    output "Break!"
+    sleep 10
+  fi
 done
 output "Done!"
