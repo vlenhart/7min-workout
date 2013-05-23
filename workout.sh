@@ -35,8 +35,8 @@ exercises=(
 for exercise in "${exercises[@]}"
 do
   output $exercise
-  sleep 3
+  sleep 30
   output "Break!"
-  sleep 1
+  sleep 10
 done
 output "Done!"
