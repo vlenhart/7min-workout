@@ -1,3 +1,5 @@
+#!/bin/sh
+
 function output() {
   which say > /dev/null
   if [ $? -eq 0 ]
