@@ -1,16 +1,14 @@
 #!/bin/sh
 
 function output() {
-  which say > /dev/null
-  if [ $? -eq 0 ]
-  then
+  #check for 'say' which is found in osx
+  if `which say > /dev/null` then
     say $@
     return
   fi
 
-  which espeak > /dev/null
-  if [ $? -eq 0 ]
-  then
+  #check for espeak which is the open source alternative
+  if `which espeak > /dev/null` then
     echo $@ | espeak
     return
   fi
@@ -46,4 +44,5 @@ do
     sleep 10
   fi
 done
+
 output "Done!"
