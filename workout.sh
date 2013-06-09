@@ -2,13 +2,15 @@
 
 function output() {
   #check for 'say' which is found in osx
-  if `which say > /dev/null` then
+  if `which say > /dev/null`
+  then
     say $@
     return
   fi
 
   #check for espeak which is the open source alternative
-  if `which espeak > /dev/null` then
+  if `which espeak > /dev/null`
+  then
     echo $@ | espeak
     return
   fi
