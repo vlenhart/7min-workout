@@ -53,7 +53,9 @@ break_duration=(
 
 for i in $(seq 0 $((${#exercises[@]} - 1)))
 do
-  output ${exercises[$i]}
+  output "prepare for "${exercises[$i]}
+  sleep 1
+  output "Go!"
   sleep 30
 
   if [ ${break_duration[$i]} -gt 0 ]
