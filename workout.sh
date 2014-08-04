@@ -34,6 +34,39 @@ exercises=(
   "Lunges!"
   "Push-up and rotation!"
   "Side plank!"
+  "Switch sides!"
+)
+
+prepare_duration=(
+  1
+  1
+  1
+  1
+  1
+  1
+  1
+  1
+  1
+  1
+  1
+  1
+  0
+)
+
+exercises_duration=(
+  30
+  30
+  30
+  30
+  30
+  30
+  30
+  30
+  30
+  30
+  30
+  15
+  15
 )
 
 break_duration=(
@@ -49,14 +82,21 @@ break_duration=(
   10
   10
   0
+  0
 )
 
 for i in $(seq 0 $((${#exercises[@]} - 1)))
 do
-  output "prepare for "${exercises[$i]}
-  sleep 1
-  output "Go!"
-  sleep 30
+  if [ ${prepare_duration[$i]} -gt 0 ]
+  then
+    output "prepare for "${exercises[$i]}
+    sleep ${prepare_duration[$i]}
+    output "Go!"
+  else
+    output ${exercises[$i]}
+  fi
+
+  sleep ${exercises_duration[$i]}
 
   if [ ${break_duration[$i]} -gt 0 ]
   then
