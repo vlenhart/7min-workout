@@ -1,16 +1,18 @@
 #!/bin/sh
 
-function output() {
+command_exists() {
+ return `command -v $1 > /dev/null`
+}
+
+output() {
   #check for 'say' which is found in osx
-  if `which say > /dev/null`
-  then
+  if command_exists say; then
     say $@
     return
   fi
 
   #check for espeak which is the open source alternative
-  if `which espeak > /dev/null`
-  then
+  if command_exists espeak; then
     echo $@ | espeak
     return
   fi
