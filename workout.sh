@@ -35,17 +35,31 @@ exercises=(
   "Push-up and rotation!"
   "Side plank!"
 )
-last_exercise=${exercises[${#exercises[@]}-1]}
 
-for exercise in "${exercises[@]}"
+break_duration=(
+  10
+  10
+  10
+  10
+  10
+  10
+  10
+  10
+  10
+  10
+  10
+  0
+)
+
+for i in $(seq 0 $((${#exercises[@]} - 1)))
 do
-  output $exercise
+  output ${exercises[$i]}
   sleep 30
 
-  if [ "$exercise" != "$last_exercise" ]
+  if [ ${break_duration[$i]} -gt 0 ]
   then
     output "Break!"
-    sleep 10
+    sleep ${break_duration[$i]}
   fi
 done
 
