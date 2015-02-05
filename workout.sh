@@ -1,19 +1,19 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 command_exists() {
- return `command -v $1 > /dev/null`
+  return "$(command -v "$1" > /dev/null)"
 }
 
 output() {
   #check for 'say' which is found in osx
   if command_exists say; then
-    say $@
+    say "$@"
     return
   fi
 
   #check for espeak which is the open source alternative
   if command_exists espeak; then
-    echo $@ | espeak
+    echo "$@" | espeak
     return
   fi
 
