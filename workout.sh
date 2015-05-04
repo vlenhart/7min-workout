@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 command_exists() {
-  return "$(command -v "$1" > /dev/null)"
+  command -v "$1" > /dev/null
+  return $?
 }
 
 output() {
