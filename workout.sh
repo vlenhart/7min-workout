@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-command_exists() {
-  command -v "$1" > /dev/null
-  return $?
 function countdown {
     local _time="$1"
     while (( 0 <= $_time ))
@@ -14,21 +11,25 @@ function countdown {
     printf "\r%5s\r"
 }
 
-output() {
-  #check for 'say' which is found in osx
-  if command_exists say; then
-    say "$@"
-    return
-  fi
+function command_exists {
+    command -v "$1" > /dev/null
+    return $?
+}
 
-  #check for espeak which is the open source alternative
-  if command_exists espeak; then
-    echo "$@" | espeak
-    return
-  fi
-
-  echo "No speech synthesis found: please install eSpeak http://espeak.sourceforge.net/"
-  exit 1
+function output {
+    local _str="$@"
+    if command_exists say       # check for 'say' which is found in osx
+    then
+        echo $_str && say $_str
+        return
+    elif command_exists espeak  # check for espeak which is the open source alternative
+    then
+        echo $_str | espeak
+        return
+    else
+        echo "No speech synthesis found: please install eSpeak http://espeak.sourceforge.net/"
+        exit 1
+    fi
 }
 
 exercises=(
@@ -79,7 +80,7 @@ exercises_duration=(
   15
 )
 
-break_duration=(
+rest_duration=(
   10
   10
   10
@@ -95,7 +96,7 @@ break_duration=(
   0
 )
 
-for i in $(seq 0 $((${#exercises[@]} - 1)))
+for i in ${!exercises[@]}
 do
     if [[ 0 < ${prepare_duration[i]} ]]
     then
@@ -115,4 +116,4 @@ do
     fi
 done
 
-output "Done!"
+output "Finished!"
