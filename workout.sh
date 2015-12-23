@@ -4,7 +4,10 @@ function countdown {
     local _time="$1"
     while (( 0 <= $_time ))
     do
-        printf "\r%02d:%02d" $(( (_time/60)%60)) $((_time%60))
+        if ((_time < 5))
+        then printf "\r%02d:%02d\a" $(( (_time/60)%60)) $((_time%60))
+        else printf "\r%02d:%02d" $(( (_time/60)%60)) $((_time%60))
+        fi
         _time=$((_time - 1))
         sleep 1
     done
