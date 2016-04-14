@@ -2,7 +2,7 @@
 
 function countdown {
     local _time="$1"
-    while (( 0 <= $_time ))
+    while (( 0 <= "$_time" ))
     do
         if ((_time < 5))
         then printf "\r%02d:%02d\a" $(( (_time/60)%60)) $((_time%60))
@@ -20,15 +20,13 @@ function command_exists {
 }
 
 function output {
-    local _str="$@"
+    local _str="$1"
     if command_exists say       # check for 'say' which is found in osx
     then
-        echo $_str && say $_str
-        return
+        echo "$_str" && say "$_str"
     elif command_exists espeak  # check for espeak which is the open source alternative
     then
-        echo $_str | espeak
-        return
+        echo "$_str" | espeak
     else
         echo "No speech synthesis found: please install eSpeak http://espeak.sourceforge.net/"
         exit 1
@@ -99,23 +97,23 @@ rest_duration=(
   0
 )
 
-for i in ${!exercises[@]}
+for i in "${!exercises[@]}"
 do
-    if [[ 0 < ${prepare_duration[i]} ]]
+    if [[ 0 -lt ${prepare_duration[i]} ]]
     then
-        output "Next up:" ${exercises[i]}
-        sleep ${prepare_duration[i]}
+        output "Next up: ${exercises[i]}"
+        sleep "${prepare_duration[i]}"
         output "Go!"
     else
-        output ${exercises[i]}
+        output "${exercises[i]}"
     fi
 
-    countdown ${exercises_duration[i]}
+    countdown "${exercises_duration[i]}"
 
-    if [[ 0 < ${rest_duration[i]} ]]
+    if [[ 0 -lt ${rest_duration[i]} ]]
     then
         output "Rest"
-        countdown ${rest_duration[i]}
+        countdown "${rest_duration[i]}"
     fi
 done
 
